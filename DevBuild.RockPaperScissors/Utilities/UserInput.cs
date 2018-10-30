@@ -76,6 +76,7 @@ namespace DevBuild.Utilities
                     if (!Validation.ValidateInfo(infoType, response))
                     {
                         response = "";
+                        Console.Write("I didn't recognize that response. ");
                         goto LoopStart;
                     }
                 }
@@ -86,11 +87,15 @@ namespace DevBuild.Utilities
         public static uint SelectMenuOption(int numberOfOptions) {
             uint userSelection = 0;
             string userEntry = "";
+            string errorMsg = "";
 
             while (!uint.TryParse(userEntry, out userSelection) ||
                     userSelection < 0 ||
                     userSelection > numberOfOptions) {
-                PromptUntilValidEntry($"Please enter a selection, 1-{numberOfOptions}: ", out userEntry, InformationType.Numeric);
+                userEntry = PromptUntilValidEntry($"{(String.IsNullOrEmpty(errorMsg) ? "" : (errorMsg))}Please enter a selection, 1-{numberOfOptions}: ", InformationType.Numeric);
+
+                //if we don't break the loop the next time around, we know an error occurred. Let's append an error message if we have to go through the loop again
+                errorMsg = "That entry was invalid or out of range. ";
             }
             return userSelection;
         }

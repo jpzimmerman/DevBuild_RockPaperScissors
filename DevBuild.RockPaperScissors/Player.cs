@@ -6,18 +6,26 @@ using System.Threading.Tasks;
 
 namespace DevBuild.RockPaperScissors {
     public abstract class Player {
+        public const int ROSHAMBO_STARTING_OFFSET = 200;
 
         // Let's use this dictionary as a matrix to keep track of counter moves, 
-        //then use it to counter-pick players
+        // then let the AI use it to counter-pick players
         // Listen, AI has to cheat every once in a while...
-        protected readonly static Dictionary<Roshambo, Roshambo> CounterTo = 
+        public static readonly Dictionary<Roshambo, Roshambo> CounterTo = 
             new Dictionary<Roshambo, Roshambo>() { { Roshambo.Rock,     Roshambo.Paper },
                                                    { Roshambo.Paper,    Roshambo.Scissors },
                                                    { Roshambo.Scissors, Roshambo.Rock}  };
-        protected string Name { get; set; }
-        protected Roshambo RockPaperScissorsChoice { get; set; }
+        public string Name { get; set; }
+        public Roshambo RockPaperScissorsChoice { get; set; }
+        public string[] possibleNames = { "default1", "default2", "default3" };
 
-        public abstract void GenerateRoshambo();
+        public Player(string[] possibleNames) {
+            var selectionIndex = new Random().Next(0, possibleNames.Length);
+            Name = possibleNames[selectionIndex];
+            RockPaperScissorsChoice = GenerateRoshambo();
+        }
+
+        public abstract Roshambo GenerateRoshambo();
 
     }
 }
