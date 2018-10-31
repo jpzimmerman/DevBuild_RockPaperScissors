@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace DevBuild.RockPaperScissors {
     class ChaosPlayer : Player {
-        private new static string[] possibleNames = { "Providence", "Destiny", "Fate" };
+        private new static readonly string[] possibleNames = { "Providence", "Destiny", "Fate" };
 
-        public ChaosPlayer() : base(possibleNames) {
+        public ChaosPlayer() : base() {
         }
 
         public override Roshambo GenerateRoshambo() {
@@ -16,5 +16,7 @@ namespace DevBuild.RockPaperScissors {
             RockPaperScissorsChoice = (Roshambo)(ROSHAMBO_STARTING_OFFSET + r.Next(0, 65535)%3);
             return RockPaperScissorsChoice;
         }
+
+        public override string[] GetPossibleNames() => possibleNames;
     }
 }

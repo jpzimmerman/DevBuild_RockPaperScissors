@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace DevBuild.RockPaperScissors {
     public class SavvyPlayer : Player {
-        private new static string[] possibleNames = { "Bobby" };
+        private new static readonly string[] possibleNames = { "Bobby" };
 
-        public SavvyPlayer() : base(possibleNames) {
+        public SavvyPlayer() : base() {
 
         }
 
@@ -32,6 +32,8 @@ namespace DevBuild.RockPaperScissors {
             return Player.CounterTo[playerPick];
         }
 
-        
+        public override string[] GetPossibleNames() => possibleNames;
+
+
     }
 }

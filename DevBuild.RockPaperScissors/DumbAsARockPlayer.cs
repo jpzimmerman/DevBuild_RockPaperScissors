@@ -6,14 +6,16 @@ using System.Threading.Tasks;
 
 namespace DevBuild.RockPaperScissors {
     public class DumbAsARockPlayer : Player {
-        private new static string[] possibleNames = { "Basalt", "Obsidian", "Pluton", "Siltstone", "Gabbro"};
+        private new static readonly string[] possibleNames = { "Basalt", "Obsidian", "Pluton", "Siltstone", "Gabbro"};
 
-        public DumbAsARockPlayer() : base(possibleNames) {
+        public DumbAsARockPlayer() : base() {
         }
 
         public override Roshambo GenerateRoshambo() {
             RockPaperScissorsChoice = Roshambo.Rock;
             return RockPaperScissorsChoice;
         }
+
+        public override string[] GetPossibleNames() => possibleNames;
     }
 }

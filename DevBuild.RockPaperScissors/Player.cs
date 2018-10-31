@@ -19,13 +19,15 @@ namespace DevBuild.RockPaperScissors {
         public Roshambo RockPaperScissorsChoice { get; set; }
         public string[] possibleNames = { "default1", "default2", "default3" };
 
-        public Player(string[] possibleNames) {
-            var selectionIndex = new Random().Next(0, possibleNames.Length);
-            Name = possibleNames[selectionIndex];
+        public Player() {
+            var selectionIndex = new Random().Next(0, GetPossibleNames().Length);
+            Name = GetPossibleNames()[selectionIndex];
             RockPaperScissorsChoice = GenerateRoshambo();
         }
 
         public abstract Roshambo GenerateRoshambo();
+
+        public abstract string[] GetPossibleNames();
 
     }
 }
